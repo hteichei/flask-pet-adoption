@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <div class='display_page'>
+
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ found_pet.photo_url }}" alt="Pet Photo">
+      <div class="card-body">
+        <h5 class="card-title"> Hi, my name is {{ found_pet.name }}.</h5>
+          {% if found_pet.available %} 
+        <p class="card-text">
+           'I'm available to adopt!
+        </p>
+          {% endif %} 
+      </div>
+      <ul class="list-group list-group-flush">
+          <li class="list-group-item">Age: {{ found_pet.age }}</li>
+          <li class="list-group-item">Species: {{ found_pet.species }}</li>
+          <li class="list-group-item">Notes: {{ found_pet.notes }}</li>
+        </ul>
+      </div>
+
+
+  </div>
+  <div class='display_page'>
+
+<form action="{{ url_for('show_pet', pet_id=pet_id) }}" method="POST">
+
+  {{ form.hidden_tag() }}
+  
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <div class='form-group'>
+      {{ field.label }}
+      {{ field }}
+    </div>
+      {% for error in field.errors %}
+        {{ error }}
+      {% endfor %}
+  {% endfor %}
+  
+  <button type="submit">Submit</button>
+  
+  </form>
+</div>
+
+</div>
+
+  {% endblock %}
