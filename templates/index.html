@@ -1,13 +1,15 @@
 {% extends "base.html" %} {% block content %}
 <div>
   <div class="jumbotron jumbotron-fluid">
-    <div class="container">
+    <div class='container'>
       <h1 class="display-4">PETS!</h1>
       <p class="lead">Current Pets For You</p>
       <a class="btn btn-primary btn-lg" href="{{ url_for('add_pet') }}" role="button">Add a Pet</a>
+      <span></span>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('add_random_pet') }}" role="button">Add a Random Pet</a>
     </div>
   </div>
-  <div>
+  <div class='body'>
     {% for pet in pet_list %} 
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" src="{{ pet.photo_url }}" alt="Pet Photo">
@@ -30,17 +32,3 @@
 </div>
 
 {% endblock %}
-
-
-    
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
