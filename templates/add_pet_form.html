@@ -1,24 +1,22 @@
 {% extends "base.html" %} {% block content %}
-<div>
+<div id='addFormContainer' class='container'>
 
-<form action="/add" method="POST">
+  <form action="/add" method="POST">
+    <fieldset class="form-group">
 
-  {{ form.hidden_tag() }}
-  
-  {% for field in form if field.widget.input_type != 'hidden' %}
-    <div class='form-group'>
-      {{ field.label }}
-      {{ field(class_='form-control') }}
-    </div>
-      {% for error in field.errors %}
-        {{ error }}
-      {% endfor %}
-  {% endfor %}
-  
-  <button class='btn-btn-primary' type="submit">Submit</button>
-  
+      {{ form.hidden_tag() }}
+      <div class='container'>
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <div class='form-group'>
+          {{ field.label }} {{ field(class_='form-control') }}
+        </div>
+        {% for error in field.errors %} {{ error }} {% endfor %} {% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
   </form>
 
 </div>
 
-  {% endblock %}
+{% endblock %}

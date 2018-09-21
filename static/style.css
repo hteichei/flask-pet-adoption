@@ -4,6 +4,8 @@ form {
 .card {
   display: flex;
   width: 210px;
+  margin: 1.5em 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .display_page {
@@ -20,4 +22,18 @@ img {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px 10px;
+}
+
+.jumbotron {
+  padding: 20px;
+  background-color: (0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin: 1em 1em;
+  background-image: url('https://images.unsplash.com/photo-1509559320938-387dfd4e966b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dbc53e8be8116d96201793c67b3ac57e&auto=format&fit=crop&w=1650&q=80');
+  background-position: center;
+  color: black;
+}
+
+#addFormContainer {
+  width: 600px;
 }

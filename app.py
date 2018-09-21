@@ -72,20 +72,22 @@ def display_pets():
     return render_template('index.html', pet_list=pet_list)
 
 
-@app.route('/add/random', methods=['GET'])
-def add_random_pet():
-    """Add random pet to the index.html page using PetFinder API"""
+def get_random_pet_info():
+    """Get random pet info from PetFinder"""
 
     api_key = os.environ['API_KEY']
     r = requests.get(
         f'http://api.petfinder.com/pet.getRandom?key={api_key}&format=json&output=basic'
     )
+    pet_api_info = r.json()['petfinder']['pet']
 
-    age = r.json()['petfinder']['pet']['age']['$t']
-    name = r.json()['petfinder']['pet']['name']['$t']
-    species = r.json()['petfinder']['pet']['animal']['$t']
-    photo_url = r.json()['petfinder']['pet']['media']['photos']['photo'][0][
-        '$t']
+    age = pet_api_info['age']['$t']
+    name = pet_api_info['name']['$t']
+    species = pet_api_info['animal']['$t']
+    if pet_api_info['media']['photos']['photo']:
+        photo_url = pet_api_info['media']['photos']['photo'][2]['$t']
+    else:
+        photo_url = 'https://images.unsplash.com/photo-1503756755766-151cb0cd465f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=08f6944494ab6719d970d7cbceb3daa7&auto=format&fit=crop&w=800&q=60'
     available = True
 
     new_pet = Pet(
@@ -96,6 +98,13 @@ def add_random_pet():
         available=available)
     db.session.add(new_pet)
     db.session.commit()
+
+
+@app.route('/add/random', methods=['GET'])
+def add_random_pet():
+    """Add random pet to the index.html page using random pet info"""
+    get_random_pet_info()
+
     return redirect(url_for('display_pets'))
 
 
@@ -150,7 +159,7 @@ def show_pet(pet_id):
 
 @app.route('/api/pets/<int:pet_id>', methods=['GET'])
 def get_pet_data(pet_id):
-"""Allows people to find pet info using the route above"""
+    """Create a route for people to get JSON info on pets"""
 
     found_pet = Pet.query.get(pet_id)
     return jsonify({

@@ -14,7 +14,7 @@
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" src="{{ pet.photo_url }}" alt="Pet Photo">
       <div class="card-body">
-        <h5 class="card-title"> Hi, my name is <a href="{{ url_for('show_pet', pet_id=pet.id) }}">{{ pet.name }}</a>.</h5>
+        <h5 class="mt-2 card-title"> Hi, my name is <a href="{{ url_for('show_pet', pet_id=pet.id) }}">{{ pet.name }}</a>.</h5>
           {% if pet.available %} 
         <p class="card-text">
            I'm available to adopt!
